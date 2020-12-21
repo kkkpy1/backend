@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias type="com.sup.vo.CustomerVO" alias="customerVO" />
 		<typeAlias type="com.sup.vo.ProductVO" alias="productVO" />
+		<typeAlias type="com.sup.vo.PurchaseVO" alias="purchaseVO" />
 	</typeAliases>
 </configuration>

@@ -12,10 +12,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class PurchaseVO {
+	private int purchaseId;
 	private int productId;
 	private String senderId;
 	private String recepientId;
 	private String purchaseState;
 	private String purchaseDate;
+	// 여기부터는 product join
+	private String productName;
+	private int productPrice;
 	
 }

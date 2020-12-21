@@ -5,8 +5,8 @@ import java.util.List;
 import com.sup.vo.ProductVO;
 
 public interface ProductDao {
-	List<ProductVO> selectAll();
+	List<ProductVO> selectAllProduct();
 
-	List<ProductVO> selectOne(int productId);
+	List<ProductVO> selectOneProduct(int productId);
 
 }

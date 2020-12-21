@@ -15,12 +15,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductVO> selectAllProduct() {
-		return this.productDao.selectAll();
+		return this.productDao.selectAllProduct();
 	}
 
 	@Override
 	public List<ProductVO> selectOneProduct(int productId) {
-		return this.productDao.selectOne(productId);
+		return this.productDao.selectOneProduct(productId);
 	}
 
 }

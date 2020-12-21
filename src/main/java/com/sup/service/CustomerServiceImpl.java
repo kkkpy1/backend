@@ -14,30 +14,6 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao customerDao;
 
 	@Override
-	public CustomerVO read(String userid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<CustomerVO> readAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(CustomerVO userVO) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(String userid) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void create(CustomerVO customerVO) {
 		this.customerDao.insertUser(customerVO);
 	}
@@ -65,6 +41,21 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public int findPasswordByEmail(String userid, String name, String email) {
 		return this.customerDao.findPasswordByEmail(userid, name, email);
+	}
+
+	@Override
+	public List<CustomerVO> findUserByName(String memberName) {
+		return this.customerDao.selectUserByName(memberName);
+	}
+
+	@Override
+	public void addFriend(String memberId, String friendId) {
+		this.customerDao.insertFriends(memberId, friendId);
+	}
+
+	@Override
+	public List<CustomerVO> getFriendsList(String memberId) {
+		return this.customerDao.selectFriends(memberId);
 	}
 
 }

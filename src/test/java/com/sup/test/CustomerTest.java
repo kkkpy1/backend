@@ -94,6 +94,36 @@ class CustomerTest {
 		else {
 			System.out.println("result = 1");
 		}
+	}
+	
+	@Disabled @Test
+	void findFriend() { // 이름으로 친구 검색 완료
+		String memberName = "소비자3";
+		List<CustomerVO> list = this.customerService.findUserByName(memberName);
+		for (int i = 0; i < list.size(); i++) {
+			log.info(list.get(i).getMemberId());
+			log.info(list.get(i).getMemberEmail());
+			log.info(list.get(i).getMemberPassword());
+		}
+	}
+	
+	@Disabled @Test
+	void weAreFriend() { // 친구 추가 완료
+		String memberId = "customer3";
+		String friendId = "customer2";
+		this.customerService.addFriend(memberId, friendId);
+	}
+	
+	@Test
+	void showMyFriends() { // 친구 목록 가져오기~~ 성공!
+		String memberId = "customer1";
+		List<CustomerVO> list = this.customerService.getFriendsList(memberId);
+		for (int i = 0; i < list.size(); i++) {
+			log.info(list.get(i).getMemberId());
+			log.info(list.get(i).getMemberEmail());
+			log.info(list.get(i).getMemberGender());
+			log.info(list.get(i).getMemberPassword());
+		}
 		
 	}
 

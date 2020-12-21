@@ -17,7 +17,7 @@ public class ProductDaoImpl implements ProductDao {
 	
 
 	@Override
-	public List<ProductVO> selectAll() {
+	public List<ProductVO> selectAllProduct() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		this.sqlSession.selectList("Product.selectAllSP", map);
 		List<ProductVO> list = (List<ProductVO>)map.get("result");
@@ -26,7 +26,7 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<ProductVO> selectOne(int productId) {
+	public List<ProductVO> selectOneProduct(int productId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("productId", productId);   //INPUT Parameter
 		this.sqlSession.selectList("Product.selectOneSP", map);

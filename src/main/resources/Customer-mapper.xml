@@ -37,7 +37,7 @@
 			jdbcType="INTEGER" mode="OUT" />
 	</parameterMap>
 
-	<select id="login" statementType="CALLABLE"
+	<select id="loginSP" statementType="CALLABLE"
 		parameterMap="loginParameterMap">
 		{ call sp_customer_login(?, ?, ?) }
 	</select>
@@ -58,7 +58,7 @@
 			jdbcType="CURSOR" mode="OUT" resultMap="findIdMap" />
 	</parameterMap>
 
-	<select id="findIdByPhone" statementType="CALLABLE"
+	<select id="findIdByPhoneSP" statementType="CALLABLE"
 		parameterMap="findIdByPhoneParameterMap">
 		{ call sp_customer_find_id_by_phone(?, ?, ?) }
 	</select>
@@ -71,7 +71,7 @@
 			jdbcType="CURSOR" mode="OUT" resultMap="findIdMap" />
 	</parameterMap>
 
-	<select id="findIdByEmail" statementType="CALLABLE"
+	<select id="findIdByEmailSP" statementType="CALLABLE"
 		parameterMap="findIdByEmailParameterMap">
 		{ call sp_customer_find_id_by_email(?, ?, ?) }
 	</select>
@@ -85,7 +85,7 @@
 			jdbcType="INTEGER" mode="OUT" />
 	</parameterMap>
 
-	<select id="findPasswordByPhone" statementType="CALLABLE"
+	<select id="findPasswordByPhoneSP" statementType="CALLABLE"
 		parameterMap="findPasswordByPhoneParameterMap">
 		{ call sp_customer_find_password_by_phone(?, ?, ?, ?) }
 	</select>
@@ -99,9 +99,74 @@
 			jdbcType="INTEGER" mode="OUT" />
 	</parameterMap>
 
-	<select id="findPasswordByEmail" statementType="CALLABLE"
+	<select id="findPasswordByEmailSP" statementType="CALLABLE"
 		parameterMap="findPasswordByEmailParameterMap">
 		{ call sp_customer_find_password_by_email(?, ?, ?, ?) }
 	</select>
+
+
+	<!-- select Using SelectMap-->
+	<resultMap type="customerVO" id="selectMap">
+		<id property="memberId" javaType="String" 
+		column="member_id" jdbcType="VARCHAR" />
+		
+		<result property="memberPassword" javaType="String"
+			column="member_password" jdbcType="VARCHAR" />
+
+		<result property="memberName" javaType="String"
+			column="member_name" jdbcType="VARCHAR" />
+
+		<result property="memberGender" javaType="String"
+			column="member_gender" jdbcType="VARCHAR" />
+
+		<result property="memberBirthday" javaType="String"
+			column="member_birthday" jdbcType="VARCHAR" />
+
+		<result property="memberEmail" javaType="String"
+			column="member_email" jdbcType="VARCHAR" />
+
+		<result property="memberPhone" javaType="String"
+			column="member_phone" jdbcType="VARCHAR" />
+
+		<result property="memberActivated" javaType="String"
+			column="member_activated" jdbcType="CHAR" />
+
+		<result property="memberTerms" javaType="String"
+			column="member_terms" jdbcType="CHAR" />
+
+		<result property="memberDate" javaType="String"
+			column="member_date" jdbcType="VARCHAR" />
+	</resultMap>	
+	<parameterMap type="hashMap" id="selectUserByNameParameterMap">
+		<parameter property="memberName" javaType="String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="result" javaType="ResultSet" jdbcType="CURSOR" 
+		mode="OUT" resultMap="selectMap"/>
+	</parameterMap>
+	<select id="selectUserByNameSP" parameterMap="selectUserByNameParameterMap" statementType="CALLABLE">
+		{ call sp_customer_select_user_by_name(?, ?) }	
+	</select>
+
+	<!-- Friend -->
+	<parameterMap type="hashMap" id="insertFriendsParameterMap">
+		<parameter property="memberId" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="friendId" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+
+	<insert id="insertFriendsSP" statementType="CALLABLE" parameterMap="insertFriendsParameterMap">
+		{ call sp_customer_insert_friends(?, ?)}
+	</insert>
 	
+	<parameterMap type="hashMap" id="selectFriendsParameterMap">
+		<parameter property="memberId" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="result" javaType="ResultSet"
+			jdbcType="CURSOR" resultMap = "selectMap" mode="OUT" />
+	</parameterMap>
+
+	<select id="selectFriendsSP" statementType="CALLABLE" parameterMap="selectFriendsParameterMap">
+		{ call sp_customer_select_friends(?, ?)}
+	</select>
+
 </mapper>

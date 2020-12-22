@@ -31,6 +31,7 @@
 				<value>classpath:Customer-mapper.xml</value>
 				<value>classpath:Product-mapper.xml</value>
 				<value>classpath:Purchase-mapper.xml</value>
+				<value>classpath:Post-mapper.xml</value>
 			</list>
 		</property>
 	</bean>

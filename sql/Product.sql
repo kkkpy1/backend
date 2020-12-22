@@ -30,3 +30,20 @@ BEGIN
     WHERE product_id = v_product_id;
 END;
 
+-- select Product by name
+CREATE OR REPLACE PROCEDURE sp_product_select_by_name
+(
+    v_product_name     IN      product.product_name%TYPE,
+    product_record    OUT     SYS_REFCURSOR
+
+)
+AS
+BEGIN
+    OPEN product_record FOR
+    SELECT product_id, member_id, product_name, product_img, product_price, 
+    product_brand, product_detail, product_category, product_quantity, product_activated, 
+    TO_CHAR(product_date, 'YYYY-MM-DD') AS product_date
+    FROM Product
+    WHERE product_name like '%' || v_product_name || '%';
+END;
+

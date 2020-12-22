@@ -114,7 +114,7 @@ class CustomerTest {
 		this.customerService.addFriend(memberId, friendId);
 	}
 	
-	@Test
+	@Disabled @Test
 	void showMyFriends() { // 친구 목록 가져오기~~ 성공!
 		String memberId = "customer1";
 		List<CustomerVO> list = this.customerService.getFriendsList(memberId);
@@ -124,7 +124,16 @@ class CustomerTest {
 			log.info(list.get(i).getMemberGender());
 			log.info(list.get(i).getMemberPassword());
 		}
-		
+	}
+	
+	@Test
+	void findUserByID() { // ID로 유저 검색
+		String memberId= "customer1";
+		List<CustomerVO> list = this.customerService.getCustomerInfo(memberId);
+		assertNotNull(list.get(0));
+		log.info(list.get(0).getMemberGender());
+		log.info(list.get(0).getMemberEmail());
+		log.info(list.get(0).getMemberPassword());
 	}
 
 }

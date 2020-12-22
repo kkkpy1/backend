@@ -191,3 +191,23 @@ BEGIN
         from member innter join friends USING (member_id)
         WHERE member_id = v_member_id);
 END;
+
+-- ID로 소비자 찾기
+CREATE OR REPLACE PROCEDURE sp_customer_select_user_by_id
+(
+    v_member_id     IN    member.member_id%TYPE,
+    result    OUT     SYS_REFCURSOR
+
+)
+IS
+BEGIN
+    OPEN result FOR
+
+    SELECT member_id, member_password, member_name, member_gender, 
+    TO_CHAR(member_birthday, 'YYYY-MM-DD'), member_email, member_phone, 
+    member_activated, member_terms, TO_CHAR(member_date, 'YYYY-MM-DD')
+    FROM MEMBER
+    WHERE member_code=1 --소비자
+    AND member_id = v_member_id;
+END;
+

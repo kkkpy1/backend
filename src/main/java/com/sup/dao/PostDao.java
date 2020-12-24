@@ -16,5 +16,7 @@ public interface PostDao {
 
 	void delete(int postId);
 
+	List<PostVO> selectFriendsPost(String memberId);
+
 	
 }

@@ -48,4 +48,12 @@ public class PostDaoImpl implements PostDao {
 		this.sqlSession.delete("Post.delete", postId);
 	}
 
+	@Override
+	public List<PostVO> selectFriendsPost(String memberId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);   //INPUT Parameter
+		this.sqlSession.selectList("Post.selectFriendsPostSP", map);
+		return (List<PostVO>) map.get("result");
+	}
+
 }

@@ -29,6 +29,29 @@ BEGIN
     WHERE post.member_id = v_member_id;
 END;
 
+
+-- select friends post
+CREATE OR REPLACE PROCEDURE sp_post_select_friends_post
+(
+    v_member_id     IN      post.member_id%TYPE,
+    record    OUT     SYS_REFCURSOR
+
+)
+AS
+BEGIN
+    OPEN record FOR
+    SELECT product_id, product_name, product_img, product_price, product_brand, product_category,
+    post_id, post.member_id, post_content, post_shared_range, post_like_count, 
+    TO_CHAR(post_date, 'YYYY-MM-DD') AS post_date
+    FROM POST inner join product using(product_id)
+    WHERE post.member_id 
+    in (
+        SELECT friend_id from FRIENDS 
+        WHERE friends.member_id = v_member_id
+    );
+END;
+
+
 -- select one post
 CREATE OR REPLACE PROCEDURE sp_post_select
 (

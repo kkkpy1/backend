@@ -67,6 +67,16 @@
 		{ call sp_post_select_my_post(?, ?) }	
 	</select>
 
+	<parameterMap type="hashMap" id="selectFriendsPostParameterMap">
+		<parameter property="memberId" javaType="String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="result" javaType="ResultSet" jdbcType="CURSOR" 
+		mode="OUT" resultMap="selectMap"/>
+	</parameterMap>
+	<select id="selectFriendsPostSP" parameterMap="selectFriendsPostParameterMap" statementType="CALLABLE">
+		{ call sp_post_select_friends_post(?, ?) }	
+	</select>
+
+
 	<parameterMap type="hashMap" id="selectOneParameterMap">
 		<parameter property="postId" javaType="Integer" jdbcType="INTEGER" mode="IN"/>
 		<parameter property="result" javaType="ResultSet" jdbcType="CURSOR" 

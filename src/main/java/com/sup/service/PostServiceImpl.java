@@ -20,7 +20,6 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<PostVO> selectMyPost(String memberId) {
-		// TODO Auto-generated method stub
 		return this.postDao.selectMyPost(memberId);
 	}
 
@@ -37,6 +36,11 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public void delete(int postId) {
 		this.postDao.delete(postId);
+	}
+
+	@Override
+	public List<PostVO> selectFriendsPost(String memberId) {
+		return this.postDao.selectFriendsPost(memberId);
 	}
 
 }

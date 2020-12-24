@@ -56,6 +56,19 @@ class PostTest {
 			log.info(list.get(i).getPostContent());
 		}
 	}
+	
+	@Test
+	void selectFPost() { // 친구글 목록..
+		String memberId = "customer1";
+		List<PostVO> list = this.postService.selectFriendsPost(memberId);
+		System.out.println(list.size());
+
+		for (int i = 0; i < list.size(); i++) {
+			log.info(list.get(i).getMemberId());
+			log.info(list.get(i).getPostContent());
+		}
+	}
+	
 	@Disabled @Test
 	void selectOnePost() { // 글번호로 글 가져오기
 		int postId = 2;
@@ -79,7 +92,7 @@ class PostTest {
 		this.postService.update(postVO);
 	}
 	
-	@Test
+	@Disabled @Test
 	void deleteT() {
 		int postId = 22;
 		this.postService.delete(postId);

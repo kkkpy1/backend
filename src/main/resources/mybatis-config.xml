@@ -8,5 +8,6 @@
 		<typeAlias type="com.sup.vo.ProductVO" alias="productVO" />
 		<typeAlias type="com.sup.vo.PurchaseVO" alias="purchaseVO" />
 		<typeAlias type="com.sup.vo.PostVO" alias="postVO" />
+		<typeAlias type="com.sup.vo.WishlistVO" alias="wishlistVO" />
 	</typeAliases>
 </configuration>

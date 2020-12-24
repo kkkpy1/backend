@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Wishlist">
+	<parameterMap type="wishlistVO" id="insertParameterMap">
+		<parameter property="productId" javaType="Integer"
+			jdbcType="INTEGER" mode="IN" />
+		<parameter property="memberId" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="wishlistName" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+
+	<insert id="insertSP" parameterType="wishlistVO"
+		statementType="CALLABLE" parameterMap="insertParameterMap">
+		{ call sp_wishlist_insert(?, ?,
+		?) }
+	</insert>
+
+	<!-- select -->
+	<resultMap type="wishlistVO" id="selectMap">
+		<id property="wishlistId" javaType="Integer" column="wishlist_id"
+			jdbcType="INTEGER" />
+
+		<result property="productId" javaType="Integer"
+			column="product_id" jdbcType="INTEGER" />
+
+		<result property="memberId" javaType="String"
+			column="member_id" jdbcType="VARCHAR" />
+
+		<result property="wishlistName" javaType="String"
+			column="wishlist_name" jdbcType="VARCHAR" />
+
+		<result property="wishlistDate" javaType="String"
+			column="wishlist_date" jdbcType="VARCHAR" />
+
+		<result property="productName" javaType="String"
+			column="product_name" jdbcType="VARCHAR" />
+
+		<result property="productPrice" javaType="Integer"
+			column="product_price" jdbcType="INTEGER" />
+		<result property="productImg" javaType="String"
+			column="product_img" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- select One -->
+	<parameterMap type="hashMap"
+		id="selectMyWishlistParameterMap">
+		<parameter property="memberId" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="result" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="selectMap" />
+	</parameterMap>
+	<select id="selectMyWishlistSP"
+		parameterMap="selectMyWishlistParameterMap" statementType="CALLABLE">
+		{ call
+		sp_wishlist_select_my_wishlist(?, ?) }
+	</select>
+
+	<parameterMap type="hashMap"
+		id="selectFriendsWishlistParameterMap">
+		<parameter property="memberId" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="result" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="selectMap" />
+	</parameterMap>
+	<select id="selectFriendsWishlistSP"
+		parameterMap="selectFriendsWishlistParameterMap" statementType="CALLABLE">
+		{ call
+		sp_wishlist_select_friends_wishlist(?, ?) }
+	</select>
+
+	<!-- update -->
+	<parameterMap type="hashMap"
+		id="updateParameterMap">
+		<parameter property="wishlistId" javaType="Integer"
+			jdbcType="INTEGER" mode="IN" />
+		<parameter property="productId" javaType="Integer"
+			jdbcType="INTEGER" mode="IN" />
+		<parameter property="memberId" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="wishlistName" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+	<update id="updateSP"
+		parameterMap="updateParameterMap" statementType="CALLABLE">
+		{ call
+		sp_wishlist_update(?, ?, ?, ?) }
+	</update>
+	
+	<!-- delete  -->
+	<parameterMap type="hashMap"
+		id="deleteParameterMap">
+		<parameter property="wishlistId" javaType="Integer"
+			jdbcType="INTEGER" mode="IN" />
+	</parameterMap>
+	<delete id="deleteSP"
+		parameterMap="deleteParameterMap"
+		statementType="CALLABLE">
+		{ call sp_wishlist_delete(?) }
+	</delete>
+</mapper>
